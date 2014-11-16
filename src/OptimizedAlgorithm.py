@@ -56,38 +56,45 @@ def main(argv=None):
     currentScore = initialScore
 
     # prepare variables alpha and beta
-    a = b = 1
+    a = b = 0
 
-    iteration = 1
     # algorithm begins here
     for x in range(0,1000):
-        alpha = a
-        beta = a + b
 
         # record current values
         highestScore = currentScore
         newKey = currentKey
 
-        # change a and b
-        a = a + 1
-        if a + b <= len(initialKey):
-            iteration = iteration + 1
-            swap(currentKey, alpha, beta)
-            potentialPlainText = replaceChar(cyphertext, newKey)
-            newScore = fitness.score(''.join(potentialPlainText))
+        # iteration = iteration + 1
 
-            if newScore > highestScore:
-                currentKey = newKey
-                highestScore = newScore
-        else:
+        alpha = a
+        beta = a + b
+
+        # step 6
+        swap(currentKey, alpha, beta)
+        
+        a = a + 1
+        if a + b > len(initialKey):
             a = 1
             b = b + 1
+            if b == len(initialKey):
+                # terminate
+                break
+        potentialPlainText = replaceChar(cyphertext, newKey)
+        newScore = fitness.score(''.join(potentialPlainText))
+
+        if newScore > highestScore:
+            currentKey = newKey
+            currentScore = newScore
+            a = b = 0
+
     
-    print initialKey
-    print currentKey
-    print initialScore
-    print currentScore
-    print iteration
+    # print initialKey
+    # print currentKey
+    # print initialScore
+    # print currentScore
+
+    print potentialPlainText
 
 if __name__ == "__main__":
     sys.exit(main())
