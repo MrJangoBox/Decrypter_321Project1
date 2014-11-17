@@ -37,76 +37,155 @@ def swap(key, a, b):
     key[a] = newA
     key[b] = newB
 
-def main2(argv=None):
-    cypher = 'GDHZMBRIZHZMJLMGBGJGBSYZOBIDHXZBMZCZOBIDHXZGDCGZDCMZLHHYZBYZJMHZTSXZRCYEZDJYUXHUMZSTZEHCXMZBGZLCMBOCZZEZOSYMBMGMZSTZMJLMGBGJGBYNZHQHXEZIZCBYZGHFGZODCXCOGHXZTSXZCZUBTTHXHYGZOBIDHXZGHFGZODCXCOGHXZBGZUBTTHXMZTXSRZOCHMCXZOBIDHXZBYZGDCGZGDHZOBIDHXZCZIDCLHGZBMZYSGZMBRIZEZGDHZCZIDCLHGZMDBTGHUZBGZBMZOSRIZHGHZEZWJRLZHU'
-    plain = 'THESIMPLESUBSTITUTIONCIPHERISACIPHERTHATHASBEENINUSEFORMANYHUNDREDSOFYEARSITBASICALLYCONSISTSOFSUBSTITUTINGEVERYPLAINTEXTCHARACTERFORADIFFERENTCIPHERTEXTCHARACTERITDIFFERSFROMCAESARCIPHERINTHATTHECIPHERALPHABETISNOTSIMPLYTHEALPHABETSHIFTEDITISCOMPLETELYJUMBLED'
-    plain2 = 'THESIMPLESUBSTITUTIONCIPHERISACIPHERTHATHASBEENINUSEFORMANYHUNDREDSOFYEARSITBASICALLYCONSISTSOFSUBSTITUTINGEVERYPLAINTEXTCHARACTERFORADIFFERENTCIPHERTEXTCHARACTERITDIFFERSFROMCAESARCIPHERINTHATTHECIPHERALPHABETISNOTSIMPLYTHEALPHABETSHIFTEDITISCOMPLETELYJUMBLED'
+# def main2(argv=None):
+#     cypher = 'GDHZMBRIZHZMJLMGBGJGBSYZOBIDHXZBMZCZOBIDHXZGDCGZDCMZLHHYZBYZJMHZTSXZRCYEZDJYUXHUMZSTZEHCXMZBGZLCMBOCZZEZOSYMBMGMZSTZMJLMGBGJGBYNZHQHXEZIZCBYZGHFGZODCXCOGHXZTSXZCZUBTTHXHYGZOBIDHXZGHFGZODCXCOGHXZBGZUBTTHXMZTXSRZOCHMCXZOBIDHXZBYZGDCGZGDHZOBIDHXZCZIDCLHGZBMZYSGZMBRIZEZGDHZCZIDCLHGZMDBTGHUZBGZBMZOSRIZHGHZEZWJRLZHU'
+#     plain = 'THESIMPLESUBSTITUTIONCIPHERISACIPHERTHATHASBEENINUSEFORMANYHUNDREDSOFYEARSITBASICALLYCONSISTSOFSUBSTITUTINGEVERYPLAINTEXTCHARACTERFORADIFFERENTCIPHERTEXTCHARACTERITDIFFERSFROMCAESARCIPHERINTHATTHECIPHERALPHABETISNOTSIMPLYTHEALPHABETSHIFTEDITISCOMPLETELYJUMBLED'
+#     plain2 = 'THESIMPLESUBSTITUTIONCIPHERISACIPHERTHATHASBEENINUSEFORMANYHUNDREDSOFYEARSITBASICALLYCONSISTSOFSUBSTITUTINGEVERYPLAINTEXTCHARACTERFORADIFFERENTCIPHERTEXTCHARACTERITDIFFERSFROMCAESARCIPHERINTHATTHECIPHERALPHABETISNOTSIMPLYTHEALPHABETSHIFTEDITISCOMPLETELYJUMBLED'
 
-    print fitness.score(''.join(cypher))
-    print fitness.score(''.join(plain))
-    print fitness.score(''.join(plain2))
+#     print fitness.score(''.join(cypher))
+#     print fitness.score(''.join(plain))
+#     print fitness.score(''.join(plain2))
 
-def main3(argv=None):
+# def main3(argv=None):
 
-    # Set up initial key
-    cyphertext = 'SOWFBRKAWFCZFSBSCSBQITBKOWLBFXTBKOWLSOXSOXFZWWIBICFWUQLRXINOCIJLWJFQUNWXLFBSZXFBTXAANTQIFBFSFQUFCZFSBSCSBIMWHWLNKAXBISWGSTOXLXTSWLUQLXJBUUWLWISTBKOWLSWGSTOXLXTSWLBSJBUUWLFULQRTXWFXLTBKOWLBISOXSSOWTBKOWLXAKOXZWSBFIQSFBRKANSOWXAKOXZWSFOBUSWJBSBFTQRKAWSWANECRZAWJ'
-    cypherArray = list(cyphertext)
-    cypherOccurence = sortOccurence(cypherArray)
+#     # Set up initial key
+#     cyphertext = 'SOWFBRKAWFCZFSBSCSBQITBKOWLBFXTBKOWLSOXSOXFZWWIBICFWUQLRXINOCIJLWJFQUNWXLFBSZXFBTXAANTQIFBFSFQUFCZFSBSCSBIMWHWLNKAXBISWGSTOXLXTSWLUQLXJBUUWLWISTBKOWLSWGSTOXLXTSWLBSJBUUWLFULQRTXWFXLTBKOWLBISOXSSOWTBKOWLXAKOXZWSBFIQSFBRKANSOWXAKOXZWSFOBUSWJBSBFTQRKAWSWANECRZAWJ'
+#     cypherArray = list(cyphertext)
+#     cypherOccurence = sortOccurence(cypherArray)
 
-    initialKey = zip(cypherOccurence, frequencyAlphabet)
-    currentKey = initialKey
+#     initialKey = zip(cypherOccurence, frequencyAlphabet)
+#     currentKey = initialKey
 
-    # calculate the initial score
-    potentialPlainText = replaceChar(cyphertext, initialKey)
-    initialScore = fitness.score(''.join(potentialPlainText))
-    currentScore = initialScore
+#     # calculate the initial score
+#     potentialPlainText = replaceChar(cyphertext, initialKey)
+#     initialScore = fitness.score(''.join(potentialPlainText))
+#     currentScore = initialScore
 
-    print potentialPlainText
-    # prepare variables alpha and beta
-    a = b = 1
+#     print potentialPlainText
+#     # prepare variables alpha and beta
+#     a = b = 1
 
     
-    newKey = currentKey
+#     newKey = currentKey
     
-    # algorithm begins here
-    for x in range(0,10000):
+#     # algorithm begins here
+#     for x in range(0,10000):
 
-        # record current values
-        # highestScore = currentScore
+#         # record current values
+#         # highestScore = currentScore
         
 
-        # iteration = iteration + 1
-        alpha = a
-        beta = a + b
+#         # iteration = iteration + 1
+#         alpha = a
+#         beta = a + b
 
-        # step 6
-        swap(newKey, alpha, beta)
+#         # step 6
+#         swap(newKey, alpha, beta)
         
-        a = a + 1
-        if a + b <= len(initialKey):
+#         a = a + 1
+#         if a + b <= len(initialKey):
             
-            potentialPlainText = replaceChar(cyphertext, newKey)
-            newScore = fitness.score(''.join(potentialPlainText))
+#             potentialPlainText = replaceChar(cyphertext, newKey)
+#             newScore = fitness.score(''.join(potentialPlainText))
 
-            if newScore > currentScore:
-                currentKey = newKey
-                currentScore = newScore
-                a = b = 1
-        else:
-            a = 1
-            b = b + 1
-            if b == len(initialKey):
-                # terminate
-                break
+#             if newScore > currentScore:
+#                 currentKey = newKey
+#                 currentScore = newScore
+#                 a = b = 1
+#         else:
+#             a = 1
+#             b = b + 1
+#             if b == len(initialKey):
+#                 # terminate
+#                 break
 
 
     
-    # print initialKey
-    # print currentKey
-    # print initialScore
-    # print currentScore
+#     # print initialKey
+#     # print currentKey
+#     # print initialScore
+#     # print currentScore
     
-    print potentialPlainText
+#     print potentialPlainText
+
+
+# def main(argv=None):
+
+#     # answer = 'THE SIMPLE SUBSTITUTION CIPHER IS A CIPHER THAT HAS BEEN IN USE FOR MANY HUNDREDS OF YEARS IT BASICALLY CONSISTS OF SUBSTITUTING EVERY PLAINTEXT CHARACTER FOR A DIFFERENT CIPHERTEXT CHARACTER IT DIFFERS FROM CAESAR CIPHER IN THAT THE CIPHER ALPHABET IS NOT SIMPLY THE ALPHABET SHIFTED IT IS COMPLETELY JUMBLED'
+#     answer = 'THESIMPLESUBSTITUTIONCIPHERISACIPHERTHATHASBEENINUSEFORMANYHUNDREDSOFYEARSITBASICALLYCONSISTSOFSUBSTITUTINGEVERYPLAINTEXTCHARACTERFORADIFFERENTCIPHERTEXTCHARACTERITDIFFERSFROMCAESARCIPHERINTHATTHECIPHERALPHABETISNOTSIMPLYTHEALPHABETSHIFTEDITISCOMPLETELYJUMBLED'
+
+#     cypherText = 'SOWDFBRKAWDFCZFSBSCSBQIDTBKOWLDBFDXDTBKOWLDSOXSDOXFDZWWIDBIDCFWDUQLDRXINDOCIJLWJFDQUDNWXLFDBSDZXFBTXAANDTQIFBFSFDQUDFCZFSBSCSBIMDWHWLNDKAXBISWGSDTOXLXTSWLDUQLDXDJBUUWLWISDTBKOWLSWGSDTOXLXTSWLDBSDJBUUWLFDULQRDTXWFXLDTBKOWLDBIDSOXSDSOWDTBKOWLDXAKOXZWSDBFDIQSDFBRKANDSOWDXAKOXZWSDFOBUSWJDBSDBFDTQRKAWSWANDECRZAWJ'
+#     cypherArray = list(cypherText)
+#     cypherOccurence = sortOccurence(cypherArray)
+
+#     # Detecting the space character
+#     mostFrequentChar = cypherOccurence[0]
+#     spacePositions = []
+#     for i in range(len(cypherText)):
+#         if cypherText[i] == mostFrequentChar:
+#             spacePositions.append(i)
+
+#     # Remove the spaces
+#     cypherTextList = filter(lambda element: element != mostFrequentChar, list(cypherText))
+#     cypherOccurence.pop(0)
+
+#     # Set up initial key
+#     initialKey = zip(cypherOccurence, frequencyAlphabet)
+#     currentKey = initialKey
+
+#     # Calculate the initial score
+#     potentialPlainText = replaceChar(cypherText, currentKey)
+#     initialScore = fitness.score(''.join(potentialPlainText))
+#     currentScore = initialScore
+
+
+#     # Step 0
+#     varA = varB = 1
+
+    
+#     for x in range(0, 1000):
+#         # Step 6
+#         newKey = currentKey
+
+#         alpha = varA
+#         beta = varA + varB
+#         swap(newKey, alpha, beta)
+        
+        
+
+#         print 'alpha ' + str(alpha)
+#         print 'beta ' + str(beta)
+
+#         varA = varA + 1
+#         if varA + varB > len(currentKey):
+#             varA = 1
+#             varB = varB + 1
+#             if varB == len(currentKey):
+#                 # goto end
+#                 break
+#         else:
+
+#             # go to Step 7: calculate new score
+#             potentialPlainText = replaceChar(cypherText, newKey)
+#             newScore = fitness.score(''.join(potentialPlainText))
+
+#             if newScore > currentScore:
+#                 currentScore = newScore
+#                 currentKey = newKey
+#                 varA = varB = 1
+#                 # goto step6
+#                 print potentialPlainText
+#                 print currentScore
+#             # else:
+#                 # varA = varB = 1
+#             # goto step6
+
+    
+#     # print list(cypherText)
+#     print initialScore
+#     print potentialPlainText
+#     print fitness.score(''.join(potentialPlainText))
+#     # print fitness.score(answer)
 
 
 def main(argv=None):
@@ -138,53 +217,14 @@ def main(argv=None):
     initialScore = fitness.score(''.join(potentialPlainText))
     currentScore = initialScore
 
+    
 
     # Step 0
-    varA = varB = 1
+    varA = 1
+    varB = 1
 
-    # Step 6
-    alpha = varA
-    beta = varA + varB
     newKey = currentKey
-    for x in range(0, 10000):
-    
-        
-        
 
-        # if varA + varB == len(currentKey):
-        #     break
-
-        # if alpha >= len(currentKey) or beta >= len(currentKey):
-        #     import pdb; pdb.set_trace()
-
-        swap(newKey, alpha, beta)
-
-        varA = varA + 1
-        if varA + varB < len(currentKey):
-
-            # go to Step 7: calculate new score
-            potentialPlainText = replaceChar(cypherText, newKey)
-            newScore = fitness.score(''.join(potentialPlainText))
-
-            if newScore > currentScore:
-
-                currentScore = newScore
-                currentKey = newKey
-                alpha = varA
-                beta = varA + varB
-                newKey = currentKey
-
-        else:
-            # Step 6d
-            varA = 1
-            varB = varB + 1
-            if varB == len(currentKey):
-                break
-
-    # print list(cypherText)
-    # print potentialPlainText
-    print fitness.score(''.join(potentialPlainText))
-    print fitness.score(answer)
 
 
 if __name__ == "__main__":
