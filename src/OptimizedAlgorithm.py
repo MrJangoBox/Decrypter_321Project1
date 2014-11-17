@@ -5,9 +5,7 @@ fitness = ns.ngram_score('english_digrams.txt')
 
 englishAlphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
-frequencyAlphabet = [' ', 'E', 'T', 'A', 'O', 'I', 'N', 'S', 'R', 'H', 'L', 'D', 'C', 'U', 'M', 'F', 'P', 'G', 'W', 'Y', 'B', 'V', 'K', 'X', 'J', 'Q', 'Z']
-
-frequencyBigram = ['TH', 'HE', 'IN', 'EN', 'NT', 'RE', 'ER', 'AN', 'TI', 'ES', 'ON', 'AT', 'SE', 'ND', 'OR', 'AR', 'AL', 'TE', 'CO', 'DE', 'TO', 'RA', 'ET', 'ED', 'IT', 'SA', 'EM', 'RO']
+frequencyAlphabet = ['E', 'T', 'A', 'O', 'I', 'N', 'S', 'R', 'H', 'L', 'D', 'C', 'U', 'M', 'F', 'P', 'G', 'W', 'Y', 'B', 'V', 'K', 'X', 'J', 'Q', 'Z']
 
 def sortOccurence(text):
     sortedOccurList = []
@@ -39,11 +37,19 @@ def swap(key, a, b):
     key[a] = newA
     key[b] = newB
 
+def main2(argv=None):
+    cypher = 'GDHZMBRIZHZMJLMGBGJGBSYZOBIDHXZBMZCZOBIDHXZGDCGZDCMZLHHYZBYZJMHZTSXZRCYEZDJYUXHUMZSTZEHCXMZBGZLCMBOCZZEZOSYMBMGMZSTZMJLMGBGJGBYNZHQHXEZIZCBYZGHFGZODCXCOGHXZTSXZCZUBTTHXHYGZOBIDHXZGHFGZODCXCOGHXZBGZUBTTHXMZTXSRZOCHMCXZOBIDHXZBYZGDCGZGDHZOBIDHXZCZIDCLHGZBMZYSGZMBRIZEZGDHZCZIDCLHGZMDBTGHUZBGZBMZOSRIZHGHZEZWJRLZHU'
+    plain = 'THESIMPLESUBSTITUTIONCIPHERISACIPHERTHATHASBEENINUSEFORMANYHUNDREDSOFYEARSITBASICALLYCONSISTSOFSUBSTITUTINGEVERYPLAINTEXTCHARACTERFORADIFFERENTCIPHERTEXTCHARACTERITDIFFERSFROMCAESARCIPHERINTHATTHECIPHERALPHABETISNOTSIMPLYTHEALPHABETSHIFTEDITISCOMPLETELYJUMBLED'
+    plain2 = 'THESIMPLESUBSTITUTIONCIPHERISACIPHERTHATHASBEENINUSEFORMANYHUNDREDSOFYEARSITBASICALLYCONSISTSOFSUBSTITUTINGEVERYPLAINTEXTCHARACTERFORADIFFERENTCIPHERTEXTCHARACTERITDIFFERSFROMCAESARCIPHERINTHATTHECIPHERALPHABETISNOTSIMPLYTHEALPHABETSHIFTEDITISCOMPLETELYJUMBLED'
 
-def main(argv=None):
+    print fitness.score(''.join(cypher))
+    print fitness.score(''.join(plain))
+    print fitness.score(''.join(plain2))
+
+def main3(argv=None):
 
     # Set up initial key
-    cyphertext = 'GDHZMBRIZHZMJLMGBGJGBSYZOBIDHXZBMZCZOBIDHXZGDCGZDCMZLHHYZBYZJMHZTSXZRCYEZDJYUXHUMZSTZEHCXMZBGZLCMBOCZZEZOSYMBMGMZSTZMJLMGBGJGBYNZHQHXEZIZCBYZGHFGZODCXCOGHXZTSXZCZUBTTHXHYGZOBIDHXZGHFGZODCXCOGHXZBGZUBTTHXMZTXSRZOCHMCXZOBIDHXZBYZGDCGZGDHZOBIDHXZCZIDCLHGZBMZYSGZMBRIZEZGDHZCZIDCLHGZMDBTGHUZBGZBMZOSRIZHGHZEZWJRLZHU'
+    cyphertext = 'SOWFBRKAWFCZFSBSCSBQITBKOWLBFXTBKOWLSOXSOXFZWWIBICFWUQLRXINOCIJLWJFQUNWXLFBSZXFBTXAANTQIFBFSFQUFCZFSBSCSBIMWHWLNKAXBISWGSTOXLXTSWLUQLXJBUUWLWISTBKOWLSWGSTOXLXTSWLBSJBUUWLFULQRTXWFXLTBKOWLBISOXSSOWTBKOWLXAKOXZWSBFIQSFBRKANSOWXAKOXZWSFOBUSWJBSBFTQRKAWSWANECRZAWJ'
     cypherArray = list(cyphertext)
     cypherOccurence = sortOccurence(cypherArray)
 
@@ -55,46 +61,80 @@ def main(argv=None):
     initialScore = fitness.score(''.join(potentialPlainText))
     currentScore = initialScore
 
+    print potentialPlainText
     # prepare variables alpha and beta
-    a = b = 0
+    a = b = 1
 
+    
+    newKey = currentKey
+    
     # algorithm begins here
-    for x in range(0,1000):
+    for x in range(0,10000):
 
         # record current values
-        highestScore = currentScore
-        newKey = currentKey
+        # highestScore = currentScore
+        
 
         # iteration = iteration + 1
-
         alpha = a
         beta = a + b
 
         # step 6
-        swap(currentKey, alpha, beta)
+        swap(newKey, alpha, beta)
         
         a = a + 1
-        if a + b > len(initialKey):
+        if a + b <= len(initialKey):
+            
+            potentialPlainText = replaceChar(cyphertext, newKey)
+            newScore = fitness.score(''.join(potentialPlainText))
+
+            if newScore > currentScore:
+                currentKey = newKey
+                currentScore = newScore
+                a = b = 1
+        else:
             a = 1
             b = b + 1
             if b == len(initialKey):
                 # terminate
                 break
-        potentialPlainText = replaceChar(cyphertext, newKey)
-        newScore = fitness.score(''.join(potentialPlainText))
 
-        if newScore > highestScore:
-            currentKey = newKey
-            currentScore = newScore
-            a = b = 0
 
     
     # print initialKey
     # print currentKey
     # print initialScore
     # print currentScore
-
+    
     print potentialPlainText
+
+
+def main(argv=None):
+
+    cypherText = 'SOWDFBRKAWDFCZFSBSCSBQIDTBKOWLDBFDXDTBKOWLDSOXSDOXFDZWWIDBIDCFWDUQLDRXINDOCIJLWJFDQUDNWXLFDBSDZXFBTXAANDTQIFBFSFDQUDFCZFSBSCSBIMDWHWLNDKAXBISWGSDTOXLXTSWLDUQLDXDJBUUWLWISDTBKOWLSWGSDTOXLXTSWLDBSDJBUUWLFDULQRDTXWFXLDTBKOWLDBIDSOXSDSOWDTBKOWLDXAKOXZWSDBFDIQSDFBRKANDSOWDXAKOXZWSDFOBUSWJDBSDBFDTQRKAWSWANDECRZAWJ'
+    cypherArray = list(cypherText)
+    cypherOccurence = sortOccurence(cypherArray)
+
+    # Detecting the space character
+    mostFrequentChar = cypherOccurence[0]
+    spacePositions = []
+    for i in range(len(cypherText)):
+        if cypherText[i] == mostFrequentChar:
+            spacePositions.append(i)
+
+    # Remove the spaces
+    cypherTextList = filter(lambda element: element != mostFrequentChar, list(cypherText))
+
+    # Set up initial key
+    initialKey = zip(cypherOccurence, frequencyAlphabet)
+    currentKey = initialKey
+
+    # Calculate the initial score
+    potentialPlainText = replaceChar(cypherText, initialKey)
+    initialScore = fitness.score(''.join(potentialPlainText))
+    currentScore = initialScore
+
+    
 
 if __name__ == "__main__":
     sys.exit(main())
