@@ -6,17 +6,17 @@ fitness = ns.ngram_score('english_quadgrams.txt')
 englishAlphabet = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 frequencyAlphabet = ['E', 'T', 'A', 'O', 'I', 'N', 'S', 'R', 'H', 'L', 'D', 'C', 'U', 'M', 'F', 'P', 'G', 'W', 'Y', 'B', 'V', 'K', 'X', 'J', 'Q', 'Z']
 
-# Case folds the Tokens from the submitted list   
+# Returns the text with all characters in upper case
 def getUpperCaseText(tokens):
     folded = tokens.upper()
     return folded
 
-# Generates Key
-def generateKey(keyList, alphabetList):
+# Generates the key as a list of tuples
+def generateTuppleList(keyList, alphabetList):
     tuppledKey = zip(keyList, alphabetList)
     return tuppledKey
 
-# Encrypts Text
+# Encrypts a plaintext using the given key
 def encryptText(key, plainText):
     textList = getUpperCaseText(plainText)
     cipherText = []
@@ -26,6 +26,7 @@ def encryptText(key, plainText):
                 cipherText.extend(charTupple[0])
     return cipherText
 
+# Sorts characters from highest occurence to lowest and removes duplicate characters
 def sortOccurence(text):
     sortedOccurList = []
     finalSortedList = []
@@ -37,6 +38,7 @@ def sortOccurence(text):
         
     return finalSortedList
 
+# Replaces the characters in the text using the current key
 def replaceChar(text, key):
     replacedText = []
     for charText in text:
@@ -48,12 +50,15 @@ def replaceChar(text, key):
                 
     return replacedText
 
+# Swaps two characters in the key
 def swap(key, a, b):
     newA = (key[a][0], key[b][1])
     newB = (key[b][0], key[a][1])
     key[a] = newA
     key[b] = newB
 
+
+# Decryption algorithm assumes the space character is the most common one
 def decrypt(cipherText):
     cipherList = list(cipherText)
     cipherSortedList = sortOccurence(cipherList)
@@ -81,25 +86,34 @@ def decrypt(cipherText):
     currentScore = fitness.score(''.join(plainText))
     newScore = currentScore
 
+
     iteration = 0
     while iteration < 5000:
         iteration = iteration + 1
 
+        # Select two random characters in the key
         indexA = random.randint(0, keyLength - 1)
         indexB = random.randint(0, keyLength - 1)
         newKey = list(currentKey)
+
+        # Swap those two characters
         swap(newKey, indexA, indexB)
 
+        # Evaluate new score
         plainTextList = replaceChar(cipherText, newKey)
         newScore = fitness.score(''.join(plainTextList))
 
+        # If the score is better, keep the new key. Otherwise, try another swap.
         if newScore > currentScore:
             currentScore = newScore
             currentKey = newKey
             
+            # Restore space characters
             plainText = replaceChar(cipherText, currentKey)
             for x in spacePositions:
                 plainText.insert(x, ' ')
+            
+            # Print results with current key
             print ''.join(plainText)
             print ''
             print 'Score: ' + str(currentScore)
@@ -114,7 +128,7 @@ def main(argv=None):
     # text = raw_input('Enter text: ')
     # key = raw_input('Enter key: ')
 
-    keyList = generateKey(key, englishAlphabet)
+    keyList = zip(key, englishAlphabet)
     cipherText = encryptText(keyList, text)
 
     decrypt(cipherText)
