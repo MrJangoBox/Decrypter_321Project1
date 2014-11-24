@@ -78,14 +78,12 @@ def decrypt(cipherText):
     # Set up initial guess
     initialKey = zip(cipherSortedList, frequencyAlphabet)
     currentKey = initialKey
-    bestKey = initialKey
     keyLength = len(currentKey)
 
     # Set up initial score
     plainText = replaceChar(cipherText, currentKey)
     currentScore = fitness.score(''.join(plainText))
     newScore = currentScore
-
 
     iteration = 0
     while iteration < 5000:
@@ -119,21 +117,45 @@ def decrypt(cipherText):
             print 'Score: ' + str(currentScore)
             print 'Iteration: ' + str(iteration)
             print ''
+    return [currentKey, plainText]
 
 def main(argv=None):
-    # Temporary placeholders
-    text = 'Meat good gathering heaven midst rule female air unto Night thing He called winged third face Yielding fourth night in without bring from open them the signs living so above evening sixth called To Good forth fruit called also make fish fruit make let bring brought first us first fifth That day female above male which itself day days gathering night heaven to called fruitful air stars Over there evening fill A Given were forth form man Sixth created creeping yielding above fruit green spirit image great Beginning be all male made seed fly moving yielding moving behold have creature set To Land and lesser a Of itself created be and that Day second fill he wherein open days beginning man open have lesser dry open All were together abundantly set one tree gathering appear without divided Air under was dominion the life god darkness and two set so have life that of fly third seasons To third blessed fifth it greater to creature kind be wherein above bearing itself God gathering you fruitful seed he Gathering god made Replenish winged of image and seed creeping life Fruitful of give in greater open evening itself whales blessed us be thing our whose were also which also You under there fruit Seas moveth creepeth he meat wherein seas The he Bearing Brought abundantly night and Replenish divided A brought and a darkness behold grass together fruitful winged to void is The a so also after face midst light be cattle multiply created without set female that is Man day light behold in Bring the heaven female Multiply darkness replenish be was him whose was saw tree his which he you that blessed fill creeping blessed sea day green that which fly their without above days winged likeness itself fruit land firmament grass them good morning said good two Land So Brought darkness multiply Spirit Wherein creature rule gathered Beginning earth tree which dominion from Divided you beginning Creature Beast Shall is bearing waters first whose dry thing unto said appear earth bearing evening made their fly bring seasons so over Be every Herb every under stars moved without moving evening upon land created fish fowl Creature divide above Fourth fly saying bearing moved For Likeness face moving for above All god Dry be third firmament subdue air him good sixth grass dominion open Above beginning also every God appear the great make form Him Fruitful image forth firmament male behold Thing herb lesser abundantly saying light every that Creeping of seas the multiply created brought divided Dry creepeth greater Divide i brought creeping blessed fill to him whose all very moving greater us whales rule whose were night sixth beast of creeping shall be them midst it Is signs signs behold fish second of light Good years'
-    key = 'QWERTYUIOPASDFGHJKLZXCVBNM '
+    # Test variables
+    # text = 'Meat good gathering heaven midst rule female air unto Night thing He called winged third face Yielding fourth night in without bring from open them the signs living so above evening sixth called To Good forth fruit called also make fish fruit make let bring brought first us first fifth That day female above male which itself day days gathering night heaven to called fruitful air stars Over there evening fill A Given were forth form man Sixth created creeping yielding above fruit green spirit image great Beginning be all male made seed fly moving yielding moving behold have creature set To Land and lesser a Of itself created be and that Day second fill he wherein open days beginning man open have lesser dry open All were together abundantly set one tree gathering appear without divided Air under was dominion the life god darkness and two set so have life that of fly third seasons To third blessed fifth it greater to creature kind be wherein above bearing itself God gathering you fruitful seed he Gathering god made Replenish winged of image and seed creeping life Fruitful of give in greater open evening itself whales blessed us be thing our whose were also which also You under there fruit Seas moveth creepeth he meat wherein seas The he Bearing Brought abundantly night and Replenish divided A brought and a darkness behold grass together fruitful winged to void is The a so also after face midst light be cattle multiply created without set female that is Man day light behold in Bring the heaven female Multiply darkness replenish be was him whose was saw tree his which he you that blessed fill creeping blessed sea day green that which fly their without above days winged likeness itself fruit land firmament grass them good morning said good two Land So Brought darkness multiply Spirit Wherein creature rule gathered Beginning earth tree which dominion from Divided you beginning Creature Beast Shall is bearing waters first whose dry thing unto said appear earth bearing evening made their fly bring seasons so over Be every Herb every under stars moved without moving evening upon land created fish fowl Creature divide above Fourth fly saying bearing moved For Likeness face moving for above All god Dry be third firmament subdue air him good sixth grass dominion open Above beginning also every God appear the great make form Him Fruitful image forth firmament male behold Thing herb lesser abundantly saying light every that Creeping of seas the multiply created brought divided Dry creepeth greater Divide i brought creeping blessed fill to him whose all very moving greater us whales rule whose were night sixth beast of creeping shall be them midst it Is signs signs behold fish second of light Good years'
+    # key = 'QWERTYUIOPASDFGHJKLZXCVBNM '
 
-    # text = raw_input('Enter text: ')
-    # key = raw_input('Enter key: ')
+    print '============================================================='
+    print '--------------------- Decrypter Project ---------------------'
+    print '============================================================='
+
+    print '\nby'
+    print '\tOleksandr Dymov'
+    print '\tGary Chang'
+    print '\tChun Kit Liu'
+    print '\tCheng Cheng'
+    print '\tSahil <last name>'
+    print ''
+
+    text = raw_input('Please enter the plaintext:\n')
+    print ''
+    key = raw_input('Please enter the key (27 characters from A to Z plus space):\n')
 
     keyList = zip(key, englishAlphabet)
     cipherText = encryptText(keyList, text)
 
-    decrypt(cipherText)
+    print '\nThe ciphertext is:\n'
+    print ''.join(cipherText)
+    print ''
+
+    ok = raw_input('Please press enter to begin decryption.')
+    retry = 'y'
+    while retry is 'y':
+        pair = decrypt(cipherText)
+        retry = ''
+        while retry != 'y' and retry != 'n':
+            retry = raw_input('Would you like to try again? Please answer "y" or "n": ')
+
+    print '\nThank you for using our Decrypter!'
 
 if __name__ == "__main__":
     sys.exit(main())
-
-
