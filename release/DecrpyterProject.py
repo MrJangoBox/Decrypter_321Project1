@@ -133,7 +133,7 @@ def main(argv=None):
     print '\tGary Chang'
     print '\tChun Kit Liu'
     print '\tCheng Cheng'
-    print '\tSahil <last name>'
+    print '\tSahil Nanda'
     print ''
 
     text = raw_input('Please enter the plaintext:\n')
